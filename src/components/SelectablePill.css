@@ -1,0 +1,147 @@
+/* ─────────────────────────────────────────────────────────────────
+   SelectablePill Component
+   Toggle chip/tag using Midi Health design tokens.
+   Sizes: sm (28px) | md (32px) | lg (40px)
+   States: default | hover | selected | selected+hover | focused | disabled
+   ───────────────────────────────────────────────────────────────── */
+
+/* ── BASE ─────────────────────────────────────────────────────── */
+
+.pill {
+  /* Reset */
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  margin: 0;
+  cursor: pointer;
+
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  flex-shrink: 0;
+
+  /* Typography */
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+
+  /* Shape — full pill */
+  border-radius: var(--radius-full);
+
+  /* Colors — unselected default */
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-secondary);
+  border: 1.5px solid var(--color-border-secondary);
+
+  /* Transition */
+  transition:
+    background-color 150ms ease,
+    border-color     150ms ease,
+    color            150ms ease,
+    box-shadow       150ms ease;
+
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── SIZES ────────────────────────────────────────────────────── */
+
+.pill--sm {
+  height: 28px;
+  padding: 0 var(--spacing-lg);   /* 12px */
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  gap: var(--spacing-xs);         /* 4px  */
+}
+.pill--md {
+  height: 32px;
+  padding: 0 var(--spacing-xl);   /* 16px */
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+  gap: var(--spacing-xs);
+}
+.pill--lg {
+  height: 40px;
+  padding: 0 var(--spacing-2xl);  /* 20px */
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+  gap: var(--spacing-sm);         /* 6px  */
+}
+
+/* ── STATES ───────────────────────────────────────────────────── */
+
+/* Hover (unselected) */
+.pill:not(.pill--selected):not(:disabled):not(.pill--disabled):hover {
+  background-color: var(--color-base-15);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-secondary-hover);
+}
+
+/* Selected */
+.pill--selected:not(.pill--disabled) {
+  background-color: var(--color-brand-400);
+  color: var(--color-text-white);
+  border-color: var(--color-brand-400);
+}
+
+/* Selected + hover */
+.pill--selected:not(.pill--disabled):not(:disabled):hover {
+  background-color: var(--color-brand-600);
+  border-color: var(--color-brand-600);
+}
+
+/* Focus visible */
+.pill:focus-visible:not(:disabled):not(.pill--disabled) {
+  box-shadow: var(--focus-ring);
+}
+
+/* Disabled (unselected) */
+.pill--disabled,
+.pill:disabled {
+  background-color: var(--color-bg-disabled);
+  color: var(--color-fg-disabled);
+  border-color: var(--color-border-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Disabled + selected */
+.pill--selected.pill--disabled,
+.pill--selected:disabled {
+  background-color: var(--color-base-200);
+  border-color: var(--color-base-200);
+  color: var(--color-text-white);
+}
+
+/* ── INNER ELEMENTS ───────────────────────────────────────────── */
+
+.pill__check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* Animate in */
+  animation: pill-check-pop 200ms cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes pill-check-pop {
+  from { transform: scale(0.4); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.pill__label {
+  /* Text content */
+}
+
+/* ── GROUP ────────────────────────────────────────────────────── */
+
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);   /* 8px */
+  align-items: center;
+}

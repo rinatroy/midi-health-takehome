@@ -1,0 +1,159 @@
+/* ─────────────────────────────────────────────────────────────────
+   SymptomsCard — Mini UI
+   A realistic Midi Health intake card using design tokens.
+   ───────────────────────────────────────────────────────────────── */
+
+.symptoms-card {
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border-secondary);
+  padding: var(--spacing-4xl);   /* 32px */
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3xl);        /* 24px */
+}
+
+/* ── HEADER ───────────────────────────────────────────────────── */
+
+.symptoms-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);        /* 4px */
+}
+
+.symptoms-card__progress {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);        /* 8px */
+}
+
+.symptoms-card__progress-track {
+  flex: 1;
+  height: 4px;
+  background-color: var(--color-border-secondary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.symptoms-card__progress-fill {
+  height: 100%;
+  background-color: var(--color-brand-400);
+  border-radius: var(--radius-full);
+  transition: width 400ms ease;
+}
+
+.symptoms-card__progress-label {
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.symptoms-card__eyebrow {
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brand-400);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: var(--spacing-sm);
+}
+
+.symptoms-card__title {
+  font-family: var(--font-family);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1.3;
+  margin: var(--spacing-xs) 0 0;
+}
+
+.symptoms-card__subtitle {
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-md);
+  margin: 0;
+}
+
+/* ── BODY ─────────────────────────────────────────────────────── */
+
+.symptoms-card__body {
+  /* pill-group handles its own layout */
+}
+
+/* ── FOOTER ───────────────────────────────────────────────────── */
+
+.symptoms-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xl);        /* 16px */
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid var(--color-border-secondary);
+}
+
+.symptoms-card__count {
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-sm);
+  margin: 0;
+  min-width: 0;
+}
+
+.symptoms-card__count strong {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ── SUCCESS STATE ────────────────────────────────────────────── */
+
+.symptoms-card__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xl);
+  text-align: center;
+  padding: var(--spacing-xl) 0;
+}
+
+.symptoms-card__success-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-base-15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand-400);
+}
+
+.symptoms-card__success-title {
+  font-family: var(--font-family);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.symptoms-card__success-body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: var(--line-height-md);
+}
+
+.symptoms-card__selected-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  justify-content: center;
+}

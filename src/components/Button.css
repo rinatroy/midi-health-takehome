@@ -1,0 +1,362 @@
+/* ─────────────────────────────────────────────────────────────────
+   Button Component
+   Figma: EmOPCikbt1yXloQWzvaVAb → Buttons/Button
+   Hierarchies: primary | secondary | secondary-on-brand | tertiary
+                | link-color | link-gray
+   Sizes: sm (36px) | md (40px) | lg (44px) | xl (48px)
+   States: default | :hover | :focus-visible | :disabled | loading
+   ───────────────────────────────────────────────────────────────── */
+
+/* ── BASE ─────────────────────────────────────────────────────── */
+
+.btn {
+  /* Reset */
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);          /* 4px — from Figma gap-[var(--spacing-xs,4px)] */
+  flex-shrink: 0;
+
+  /* Typography */
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-semibold);   /* SemiBold — from Figma */
+  white-space: nowrap;
+
+  /* Shape */
+  border-radius: var(--radius-sm);            /* 6px — from Figma radius-sm */
+  position: relative;
+
+  /* Transition */
+  transition:
+    background-color 150ms ease,
+    border-color     150ms ease,
+    color            150ms ease,
+    box-shadow       150ms ease,
+    opacity          150ms ease;
+
+  /* No default outline — custom focus ring */
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── SIZES ────────────────────────────────────────────────────── */
+/*
+   Figma dimensions (text-only, no icon):
+   sm  → 150 × 36   text-sm (14/20)  px≈12  py=8
+   md  → 154 × 40   text-sm (14/20)  px=14  py=10
+   lg  → 173 × 44   text-md (16/24)  px=16  py=10
+   xl  → 177 × 48   text-md (16/24)  px=18  py=12
+*/
+
+.btn--sm {
+  height: 36px;
+  padding: 0 12px;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+}
+.btn--md {
+  height: 40px;
+  padding: 0 14px;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+}
+.btn--lg {
+  height: 44px;
+  padding: 0 16px;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+}
+.btn--xl {
+  height: 48px;
+  padding: 0 18px;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+}
+
+/* Icon-only — square, centered */
+.btn--icon-only { padding: 0; }
+.btn--icon-only.btn--sm { width: 36px; }
+.btn--icon-only.btn--md { width: 40px; }
+.btn--icon-only.btn--lg { width: 44px; }
+.btn--icon-only.btn--xl { width: 48px; }
+
+/* Icon sizes */
+.btn--sm .btn__icon svg,
+.btn--sm .btn__spinner { width: 16px; height: 16px; }
+
+.btn--md .btn__icon svg,
+.btn--md .btn__spinner { width: 20px; height: 20px; }
+
+.btn--lg .btn__icon svg,
+.btn--lg .btn__spinner { width: 20px; height: 20px; }
+
+.btn--xl .btn__icon svg,
+.btn--xl .btn__spinner { width: 20px; height: 20px; }
+
+/* ── HIERARCHY: PRIMARY ───────────────────────────────────────── */
+/*
+   bg: #579fff (brand-400)
+   text: white
+   shadow: shadow-xs-skeuomorphic
+   hover bg: #006af9 (brand-600)
+   focused: + focus-ring (green, 4px)
+   disabled: bg #eef5f7, text #bdc8cc, shadow-xs
+*/
+
+.btn--primary {
+  background-color: var(--color-brand-400);
+  color: var(--color-text-white);
+  box-shadow: var(--shadow-xs-skeuomorphic);
+}
+.btn--primary:hover:not(:disabled) {
+  background-color: var(--color-brand-600);
+}
+.btn--primary:focus-visible:not(:disabled),
+.btn--primary[data-state="focused"] {
+  background-color: var(--color-brand-400);
+  box-shadow: var(--focus-ring-skeuomorphic);
+}
+.btn--primary:active:not(:disabled) {
+  background-color: var(--color-brand-600);
+  box-shadow: var(--shadow-xs-skeuomorphic);
+}
+.btn--primary:disabled,
+.btn--primary[aria-disabled="true"] {
+  background-color: var(--color-bg-disabled);
+  color: var(--color-fg-disabled);
+  box-shadow: var(--shadow-xs);
+  cursor: not-allowed;
+}
+.btn--primary.btn--loading {
+  background-color: var(--color-brand-400);
+  color: var(--color-text-white);
+  cursor: wait;
+}
+
+/* ── HIERARCHY: SECONDARY ─────────────────────────────────────── */
+/*
+   bg: white
+   border: 1px solid #8998a1 (border-primary)
+   text: #6b7c88 (text-secondary)
+   shadow: shadow-xs-skeuomorphic
+   hover bg: #e7f0f3 (bg-primary-hover), text: #415465
+   focused: + focus-ring
+   disabled: border #eef5f7, text #bdc8cc
+*/
+
+.btn--secondary {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-primary);
+  box-shadow: var(--shadow-xs-skeuomorphic);
+}
+.btn--secondary:hover:not(:disabled) {
+  background-color: var(--color-bg-primary-hover);
+  color: var(--color-text-secondary-hover);
+  border-color: var(--color-border-primary);
+}
+.btn--secondary:focus-visible:not(:disabled),
+.btn--secondary[data-state="focused"] {
+  box-shadow: var(--focus-ring-skeuomorphic);
+}
+.btn--secondary:active:not(:disabled) {
+  background-color: var(--color-bg-primary-hover);
+}
+.btn--secondary:disabled,
+.btn--secondary[aria-disabled="true"] {
+  color: var(--color-fg-disabled);
+  border-color: var(--color-border-disabled);
+  box-shadow: var(--shadow-xs);
+  cursor: not-allowed;
+}
+.btn--secondary.btn--loading {
+  cursor: wait;
+}
+
+/* ── HIERARCHY: SECONDARY-ON-BRAND ───────────────────────────── */
+/*
+   Intended for use on brand-colored section backgrounds.
+   bg: #eef5f7 (base-15)
+   border: 1px solid #a9b5ba (base-200)
+   text: #bdc8cc (utility-brand-100) ← muted on brand bg
+   hover bg: #d3dde1 (bg-secondary-hover)
+*/
+
+.btn--secondary-on-brand {
+  background-color: var(--color-base-15);
+  color: #bdc8cc;
+  border: 1px solid var(--color-border-on-brand);
+  box-shadow: var(--shadow-xs-skeuomorphic);
+}
+.btn--secondary-on-brand:hover:not(:disabled) {
+  background-color: var(--color-bg-secondary-hover);
+  color: var(--color-text-secondary);
+}
+.btn--secondary-on-brand:focus-visible:not(:disabled),
+.btn--secondary-on-brand[data-state="focused"] {
+  box-shadow: var(--focus-ring-skeuomorphic);
+}
+.btn--secondary-on-brand:active:not(:disabled) {
+  background-color: var(--color-bg-secondary-hover);
+}
+.btn--secondary-on-brand:disabled,
+.btn--secondary-on-brand[aria-disabled="true"] {
+  color: var(--color-fg-disabled);
+  border-color: var(--color-border-disabled);
+  background-color: var(--color-bg-disabled);
+  box-shadow: var(--shadow-xs);
+  cursor: not-allowed;
+}
+
+/* ── HIERARCHY: TERTIARY ──────────────────────────────────────── */
+/*
+   No bg, no border, no shadow
+   text: #6b7c88
+   hover: subtle bg (bg-primary-hover), text darkens
+   focused: + focus-ring only
+*/
+
+.btn--tertiary {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+}
+.btn--tertiary:hover:not(:disabled) {
+  background-color: var(--color-bg-primary-hover);
+  color: var(--color-text-secondary-hover);
+}
+.btn--tertiary:focus-visible:not(:disabled),
+.btn--tertiary[data-state="focused"] {
+  background-color: var(--color-bg-primary-hover);
+  box-shadow: var(--focus-ring);
+}
+.btn--tertiary:active:not(:disabled) {
+  background-color: var(--color-bg-primary-hover);
+}
+.btn--tertiary:disabled,
+.btn--tertiary[aria-disabled="true"] {
+  color: var(--color-fg-disabled);
+  cursor: not-allowed;
+}
+
+/* ── HIERARCHY: LINK-COLOR ────────────────────────────────────── */
+/*
+   Figma: text only, no padding, height auto, text-sm
+   lg/xl: text-md
+   text: brand-600 (#006af9)
+   hover: underline, slight darken
+   disabled: fg-disabled
+*/
+
+.btn--link-color,
+.btn--link-gray {
+  background-color: transparent;
+  height: auto;
+  padding: 0;
+  border-radius: var(--radius-xs);
+}
+
+.btn--link-color {
+  color: var(--color-text-brand);
+}
+.btn--link-color:hover:not(:disabled) {
+  color: var(--color-brand-400);
+  text-decoration: underline;
+}
+.btn--link-color:focus-visible:not(:disabled),
+.btn--link-color[data-state="focused"] {
+  box-shadow: var(--focus-ring);
+}
+.btn--link-color:disabled,
+.btn--link-color[aria-disabled="true"] {
+  color: var(--color-fg-disabled);
+  cursor: not-allowed;
+}
+
+/* ── HIERARCHY: LINK-GRAY ─────────────────────────────────────── */
+
+.btn--link-gray {
+  color: var(--color-text-secondary);
+}
+.btn--link-gray:hover:not(:disabled) {
+  color: var(--color-text-secondary-hover);
+  text-decoration: underline;
+}
+.btn--link-gray:focus-visible:not(:disabled),
+.btn--link-gray[data-state="focused"] {
+  box-shadow: var(--focus-ring);
+}
+.btn--link-gray:disabled,
+.btn--link-gray[aria-disabled="true"] {
+  color: var(--color-fg-disabled);
+  cursor: not-allowed;
+}
+
+/* Link size overrides */
+.btn--link-color.btn--sm,
+.btn--link-gray.btn--sm,
+.btn--link-color.btn--md,
+.btn--link-gray.btn--md {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+}
+.btn--link-color.btn--lg,
+.btn--link-gray.btn--lg,
+.btn--link-color.btn--xl,
+.btn--link-gray.btn--xl {
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+}
+
+/* ── ICONS & SPINNER ──────────────────────────────────────────── */
+
+.btn__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.btn__text {
+  /* Inner text padding: 2px on each side (spacing-xxs) */
+  padding: 0 var(--spacing-xxs);
+}
+
+/* Remove inner padding for link buttons */
+.btn--link-color .btn__text,
+.btn--link-gray .btn__text {
+  padding: 0;
+}
+
+.btn__spinner {
+  flex-shrink: 0;
+  animation: btn-spin 0.7s linear infinite;
+  color: inherit;
+}
+
+@keyframes btn-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── STATIC STATE HELPERS (for showcase) ─────────────────────── */
+
+.btn--state-hover.btn--primary                    { background-color: var(--color-brand-600); }
+.btn--state-hover.btn--secondary                  { background-color: var(--color-bg-primary-hover); color: var(--color-text-secondary-hover); }
+.btn--state-hover.btn--secondary-on-brand         { background-color: var(--color-bg-secondary-hover); color: var(--color-text-secondary); }
+.btn--state-hover.btn--tertiary                   { background-color: var(--color-bg-primary-hover); color: var(--color-text-secondary-hover); }
+
+.btn--state-focused.btn--primary                  { box-shadow: var(--focus-ring-skeuomorphic); }
+.btn--state-focused.btn--secondary                { box-shadow: var(--focus-ring-skeuomorphic); }
+.btn--state-focused.btn--secondary-on-brand       { box-shadow: var(--focus-ring-skeuomorphic); }
+.btn--state-focused.btn--tertiary                 { background-color: var(--color-bg-primary-hover); box-shadow: var(--focus-ring); }
